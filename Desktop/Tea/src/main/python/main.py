@@ -2,12 +2,14 @@ from fbs_runtime.application_context import ApplicationContext
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5 import *
+from PyQt5.QtWebEngineWidgets import QWebEngineSettings
 from tea import *
 
 import sys
 
 class AppContext(ApplicationContext):          
     def __init__(self, app, window):
+        QWebEngineSettings.globalSettings().setAttribute(QWebEngineSettings.PluginsEnabled,True)
         version = self.build_settings['version']
         setUpUi(version, window)
      
@@ -23,7 +25,7 @@ class AppContext(ApplicationContext):
 if __name__ == '__main__':
     app = QApplication(sys.argv) 
     MainWindow = QMainWindow()
-    
+
     ui = AppContext(app, MainWindow)
     MainWindow.show()
     exit_code = ui.run()                  
